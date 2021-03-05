@@ -1,0 +1,23 @@
+{
+    "name": "tech/test-task.work",
+    "description": "test task for work.ua",
+    "type": "project",
+    "require": {
+        "illuminate/database": "^8.30"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Konstantin Shikhov",
+            "email": "konstantinshikhov@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Models\\": "app/models/",
+            "Routes\\": "routes/",
+            "Controllers\\": "app/controllers/",
+            "Services\\": "app/services/"
+        }
+    }
+}
