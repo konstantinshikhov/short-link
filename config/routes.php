@@ -1,8 +1,9 @@
 <?php
 
 $routes = [
-	'/'         => 'Controllers\URLController@index',
-	'/url-store'         => 'Controllers\URLController@store',
-	'/url/:any' => 'Controllers\URLController@show',
+    '/' => 'Controllers\URLController@index',
+    '/url-store' => 'Controllers\URLController@store',
+    '/url/:any' => 'Controllers\URLController@show',
+    '/:any' => 'Controllers\URLController@show'
 
 ];

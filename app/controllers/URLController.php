@@ -19,7 +19,7 @@ class URLController extends AppController
 	/**
 	 * @param string $short_url
 	 */
-	public function show($short_url)
+	public function show(string $short_url)
 	{
 		$link = Link::where('exp_at','>=',date("Y-m-d H:i"))->find($short_url);
 		if ($link) {
@@ -28,7 +28,11 @@ class URLController extends AppController
 		}
 		echo "Ссылка не найдена или просрочена";
 	}
-	
+
+    /**
+     * @param mixed ...$data
+     * @throws \Exception
+     */
 	public function store(...$data)
 	{
 		if (empty($_POST['long_url']) || empty($_POST['exp_at'])) {

@@ -45,14 +45,13 @@
 <body>
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-	<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
+	<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Test task</a>
 	<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
 	<ul class="navbar-nav px-3">
 		<li class="nav-item text-nowrap">
-<!--			<a class="nav-link" href="#">Sign out</a>-->
 		</li>
 	</ul>
 </header>
@@ -65,72 +64,10 @@
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="/">
 							<span data-feather="home"></span>
-							Все ссылки
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="file"></span>
-							Orders
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="shopping-cart"></span>
-							Products
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="users"></span>
-							Customers
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="bar-chart-2"></span>
-							Reports
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="layers"></span>
-							Integrations
-						</a>
-					</li>
-				</ul>
 
-				<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-					<span>Saved reports</span>
-					<a class="link-secondary" href="#" aria-label="Add a new report">
-						<span data-feather="plus-circle"></span>
-					</a>
-				</h6>
-				<ul class="nav flex-column mb-2">
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="file-text"></span>
-							Current month
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="file-text"></span>
-							Last quarter
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="file-text"></span>
-							Social engagement
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span data-feather="file-text"></span>
-							Year-end sale
-						</a>
-					</li>
+
 				</ul>
 			</div>
 		</nav>
@@ -146,7 +83,7 @@
                     <div class="row">
                         <label for="datetimepicker" class="col-sm-2 col-form-label">Дата окончанания действия</label>
                         <div class="col-sm-10">
-                        <input type="datetime" name="exp_at" id="datetimepicker"/>
+                        <input type="datetime" name="exp_at" id="datetimepicker" required />
                         </div>
                     </div>
                     <div class="form-group">
@@ -158,7 +95,7 @@
 
 		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-			<h2>Существующие ссылки</h2>
+			<h2>Existing links</h2>
 			<div class="table-responsive">
 				<table class="table table-striped table-sm">
 					<thead>
@@ -170,18 +107,18 @@
 					</tr>
 					</thead>
 					<tbody>
-					<?php if (count($params['links'])>0) { ?>
+					<?php if (count($params['links']) > 0) { ?>
 						<?php foreach ($params['links'] as $link) { ?>
                             <tr>
                                 <td><?= $link->long_url;?></td>
-                                <td><?php echo $link->short_url;?></td>
+                                <td><?= ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'].'/'.$link->short_url;?></td>
                                 <td><?= $link->counter; ?></td>
-                                <td><a href="<?= ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'].'/url/'.$link->short_url;?>" target="_blank">Перейти</a></td>
+                                <td><a class="link-reload-page" href="<?= ((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'].'/'.$link->short_url;?>" target="_blank">Перейти</a></td>
                             </tr>
 						<?php } ?>
 					<?php } else { ?>
 					<tr>
-						<td colspan="4">Нет созданных ссылок</td>
+						<td colspan="4">No links created</td>
 					</tr>
                     <?php }?>
 					</tbody>
@@ -214,6 +151,10 @@
             },
             format:'d.m.Y H:i'
         });
+
+        $(".link-reload-page").on('click',function(event){
+            location.reload();
+        })
     })
 </script>
 </body>

@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 require_once "config/db.php";
 require_once "config/routes.php";
 require_once "vendor/autoload.php";
@@ -12,8 +13,8 @@ $router = Router::fromGlobals();
 
 $router->add($routes);
 
-
 if ($router->isFound()) {
+
 	$router->executeHandler(
 		$router->getRequestHandler(),
 		$router->getParams()
@@ -25,4 +26,3 @@ if ($router->isFound()) {
 		echo '404 Not found';
 	});
 }
-
